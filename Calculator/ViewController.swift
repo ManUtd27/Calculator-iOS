@@ -10,7 +10,17 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    var isFinishedTypingNumber: Bool = true
+    
+    /**
+     Different access modifiers
+     1. private - limiting in scope only accessable in the curly brances of the block of code it was defined
+     2. fileprivate -  property or method is only accessible within the file it was declared
+     3. internal - property or method is only accessible within the current module
+     4. public - property or method is accessible to other modules.
+     5. open - public + no restrictions and free to subclass and overidden
+     */
+    
+    private var isFinishedTypingNumber: Bool = true
     
     @IBOutlet weak var displayLabel: UILabel!
     
@@ -23,7 +33,7 @@ class ViewController: UIViewController {
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
     }
-
+    
     
     /// Hanldes the logic for when the user pressed a number button
     /// - Parameter sender:The UI button Sender
@@ -39,6 +49,6 @@ class ViewController: UIViewController {
             
         }
     }
-
+    
 }
 
