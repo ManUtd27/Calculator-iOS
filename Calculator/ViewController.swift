@@ -31,10 +31,20 @@ class ViewController: UIViewController {
         isFinishedTypingNumber = true
         
         //Get the value that inside the label as a number
-        guard Double(displayLabel.text!) != nil else {
+        guard let number = Double(displayLabel.text!) else {
             fatalError("Cannot convert display lable text to a double")
         }
         
+        // Change to display number to a possitive or negative number
+        if let calcMethod =  sender.currentTitle {
+            if calcMethod == "+/-" {
+                displayLabel.text = String(number * -1)
+            } else if calcMethod == "%" {
+                displayLabel.text = String(number / 100)
+            } else if calcMethod == "AC" {
+                displayLabel.text = String(0)
+            }
+        }
     }
     
     
