@@ -57,6 +57,20 @@ class ViewController: UIViewController {
                 displayLabel.text = numValue
                 isFinishedTypingNumber = false
             } else {
+                // If numValue had a . perform this logic
+                if numValue == "." {
+                    // Get the display value and Make sure display label text can be casted to a double if not throw an error
+                    guard let currentDisplayValue = Double(displayLabel.text!) else {
+                        fatalError("Cannot convert display label text to a double")
+                    }
+                    // Round down the display label then compare that vaule to the old value to see if they match
+                   let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    // If they dont match IE the old value already has a decimal point in the number simply return and dis allow adding more decimal numbers
+                    // or appending . to the end of the display label text in the following lines
+                    if !isInt {
+                        return
+                    }
+                }
                 displayLabel.text = displayLabel.text! + numValue
             }
             
