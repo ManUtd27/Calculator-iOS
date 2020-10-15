@@ -2,9 +2,6 @@
 //  ViewController.swift
 //  Calculator
 //
-//  Created by Angela Yu on 10/09/2019.
-//  Copyright © 2019 London App Brewery. All rights reserved.
-//
 
 import UIKit
 
@@ -32,6 +29,12 @@ class ViewController: UIViewController {
         
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
+        
+        //Get the value that inside the label as a number
+        guard Double(displayLabel.text!) != nil else {
+            fatalError("Cannot convert display lable text to a double")
+        }
+        
     }
     
     
