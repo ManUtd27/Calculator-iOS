@@ -46,13 +46,11 @@ class ViewController: UIViewController {
         
         // Change to display number to a possitive or negative number
         if let calcMethod =  sender.currentTitle {
-            if calcMethod == "+/-" {
-                displayValue *= -1
-            } else if calcMethod == "%" {
-                displayValue /= 100
-            } else if calcMethod == "AC" {
-                displayValue =  0
+            let calculator = CalculatorLogic(number: displayValue)
+            guard let result = calculator.calculate(symbol: calcMethod) else {
+                fatalError("Cannot get the results from the calculator logic")
             }
+            displayValue = result
         }
     }
     
