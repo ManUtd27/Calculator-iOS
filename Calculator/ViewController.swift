@@ -19,6 +19,19 @@ class ViewController: UIViewController {
     
     private var isFinishedTypingNumber: Bool = true
     
+    private var displayValue: Double {
+        get {
+            //Get the value that inside the label as a number
+            guard let number = Double(displayLabel.text!) else {
+                fatalError("Cannot convert display lable text to a double")
+            }
+            return number
+        }
+        set {
+            displayLabel.text = String(newValue)
+        }
+    }
+    
     @IBOutlet weak var displayLabel: UILabel!
     
     
@@ -30,19 +43,15 @@ class ViewController: UIViewController {
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
         
-        //Get the value that inside the label as a number
-        guard let number = Double(displayLabel.text!) else {
-            fatalError("Cannot convert display lable text to a double")
-        }
         
         // Change to display number to a possitive or negative number
         if let calcMethod =  sender.currentTitle {
             if calcMethod == "+/-" {
-                displayLabel.text = String(number * -1)
+                displayValue *= -1
             } else if calcMethod == "%" {
-                displayLabel.text = String(number / 100)
+                displayValue /= 100
             } else if calcMethod == "AC" {
-                displayLabel.text = String(0)
+                displayValue =  0
             }
         }
     }
@@ -59,12 +68,8 @@ class ViewController: UIViewController {
             } else {
                 // If numValue had a . perform this logic
                 if numValue == "." {
-                    // Get the display value and Make sure display label text can be casted to a double if not throw an error
-                    guard let currentDisplayValue = Double(displayLabel.text!) else {
-                        fatalError("Cannot convert display label text to a double")
-                    }
                     // Round down the display label then compare that vaule to the old value to see if they match
-                   let isInt = floor(currentDisplayValue) == currentDisplayValue
+                    let isInt = floor(displayValue) == displayValue
                     // If they dont match IE the old value already has a decimal point in the number simply return and dis allow adding more decimal numbers
                     // or appending . to the end of the display label text in the following lines
                     if !isInt {
