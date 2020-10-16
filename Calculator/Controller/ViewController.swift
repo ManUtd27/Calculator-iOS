@@ -18,6 +18,8 @@ class ViewController: UIViewController {
      */
     
     private var isFinishedTypingNumber: Bool = true
+    // Create a Calculatore logic Object
+    private var calculator = CalculatorLogic()
     
     private var displayValue: Double {
         get {
@@ -34,7 +36,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var displayLabel: UILabel!
     
-    
+
     
     /// Handles the logic for when a user pressed a non-numeric button
     /// - Parameter sender: The Cureent UI button sender
@@ -42,11 +44,12 @@ class ViewController: UIViewController {
         
         //What should happen when a non-number button is pressed
         isFinishedTypingNumber = true
-        
+        // Sets the number in the Calculator Logic
+        calculator.setNumber(displayValue)
         
         // Change to display number to a possitive or negative number
         if let calcMethod =  sender.currentTitle {
-            let calculator = CalculatorLogic(number: displayValue)
+           
             guard let result = calculator.calculate(symbol: calcMethod) else {
                 fatalError("Cannot get the results from the calculator logic")
             }
